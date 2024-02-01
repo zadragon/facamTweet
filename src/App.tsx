@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "components/loader/Loader";
 
 function App() {
   const auth = getAuth(app);
@@ -27,8 +28,13 @@ function App() {
 
   return (
     <Layout>
-      <ToastContainer />
-      {init ? <Router isAuthenticated={isAuthenticated} /> : "loading"}
+      <ToastContainer
+        theme="dark"
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop
+      />
+      {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
     </Layout>
   );
 }

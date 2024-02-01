@@ -8,8 +8,7 @@ const SignupForm = () => {
   const [error, setError] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [password__confirmation, setPassword__confirmation] =
-    useState<string>("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
   const navigate = useNavigate();
 
   const onSubmit = async (e: any) => {
@@ -45,17 +44,19 @@ const SignupForm = () => {
 
       if (value?.length < 8) {
         setError("비밀번호는 8자 이상 써주세요");
+      } else if (value !== passwordConfirmation) {
+        setError("비밀번호와 비밀번호 확인값이 다릅니다.");
       } else {
         setError("");
       }
     }
     if (name === "password__confirmation") {
-      setPassword__confirmation(value);
+      setPasswordConfirmation(value);
 
       if (value?.length < 8) {
         setError("비밀번호는 8자 이상 써주세요");
       } else if (password !== value) {
-        setError("비밀번호를 똑같이 넣어라");
+        setError("비밀번호와 비밀번호 확인값이 다릅니다.");
       } else {
         setError("");
       }
@@ -92,7 +93,7 @@ const SignupForm = () => {
           type="password"
           name="password__confirmation"
           id="password__confirmation"
-          value={password__confirmation}
+          value={passwordConfirmation}
           onChange={onChange}
           required
         />
@@ -105,14 +106,14 @@ const SignupForm = () => {
 
       <div className="form__block">
         계정이 있으신가요?
-        <Link to="/login" className="form__link">
+        <Link to="/users/login" className="form__link">
           로그인하기
         </Link>
       </div>
-      <div className="form__block">
+      <div className="form__block--lg">
         <button
           type="submit"
-          className="form__btn-submit"
+          className="form__btn--submit"
           disabled={error.length > 0}
         >
           회원가입
